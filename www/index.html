@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+</head>
+<body>
+    <video
+    id="my-video"
+    class="video-js"
+    controls
+    preload="auto"
+    width="960"
+    height="540"
+    data-setup="{}"
+  >
+    <source id="vidsource" src="/get/get_video?id=wJrE14lOh_21p9KF1Vxv" type="video/mp4" />
+  </video>
+
+  <input id="vidid">
+  <button id="vidids">submit</button>
+  <script>
+    var inputv = document.getElementById("vidid");
+    var submitb = document.getElementById("vidids");
+
+    submitb.onmousedown = function(){
+      document.getElementById("my-video_html5_api").setAttribute("src", "/get/get_video?id=" + inputv.value);
+      document.getElementById("my-video_html5_api").load();
+    }
+  </script>
+
+  <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+</body>
+</html>
