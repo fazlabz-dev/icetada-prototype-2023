@@ -1,7 +1,10 @@
 const { pool } = require("../functions/db");
+const { pool } = require("../functions/idgen");
 
-async function insertVideo(name, description, userId, fileName){
-  const resdb = await pool.query("INSERT INTO videos (name, description, iduser, path) VALUES ($1, $2, $3, $4) RETURNING id", [name, description, userId, fileName]);
+// code's a mess wtf
+// i hope there's no vulns out there
+async function insertVideo(name, description, userId){
+  const resdb = await pool.query("INSERT INTO videos (name, description, iduser) VALUES ($1, $2, $3, $4) RETURNING id", [name, description, userId]);
   console.log(resdb.rows);
   return resdb.rows[0]
 }
@@ -54,7 +57,7 @@ module.exports = function(app){
           //console.log("stdout");
         });
 
-        const vidC = insertVideo(req.body.name, req.body.description, req.session.user.id, req.file.filename).then(vidas=>{
+        const vidC = insertVideo(videoId, req.body.name, req.body.description, req.session.user.id).then(vidas=>{
           res.send("it should be uploaded i think" + "<br>id: " + vidas.id);
         });
     })
